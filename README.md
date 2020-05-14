@@ -34,8 +34,3 @@ This repo hold the step by step tutorial and resource for you to restore the Mic
 * Blog Post on
 * TBD
 
-## Common Data Lake architecture for Data Warehousing:
-A commonly seen architecture in modern data warehousing is a division of the data lake in three distinct layers 
-**An ingestion layer**, storing raw data. 
-**A refined layer**, to store transformed data e.g. ready for ML. 
-**A gold layer**, to store data that is ready for consumption e.g. ready for BI. 
