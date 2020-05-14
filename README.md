@@ -39,4 +39,3 @@ A commonly seen architecture in modern data warehousing is a division of the dat
 **An ingestion layer**, storing raw data. 
 **A refined layer**, to store transformed data e.g. ready for ML. 
 **A gold layer**, to store data that is ready for consumption e.g. ready for BI. 
->>>>>>> 4df42fd596be5af8783eb4d7a01521374d583e3e
