@@ -1,7 +1,7 @@
 
 # MS-Build 2020: Building an End-to-End ML Pipeline for Big Data​
 
-This repo hold information and resources for you to create the Microsoft Build 2020 - Building End to End Machine Learning pipelines for Big Data Session demo.
+This repo holds information and resources for you to create the Microsoft Build 2020 - Building End-to-End Machine Learning pipelines for Big Data Session demo.
 
 
 ## Prerequisites:
@@ -15,13 +15,13 @@ This repo hold information and resources for you to create the Microsoft Build 2
 
 
 ## Data Flow
-1. Ingest data into Azure Blob storage with Eventhubs and Azure Databricks in stream.
-2. Preprocess the data to fit to our schema - Apache Spark.
+1. Ingest stream data into Azure Blob storage with Event hubs and Azure Databricks.
+2. Preprocess the data to fit our schema - Apache Spark.
 3. Save the data in parquet format - in raw storage directory.
-4. Merge Batch(historic) and Stream(new) data with Apache Spark - save in preprocessed storage directory.
+4. Merge Batch(historical) and Stream(new) data with Apache Spark - save in preprocessed storage directory.
 5. Create multiple Azure ML(AML) Datasets from Azure Databricks environment - save in refined storage directory.
 6. Use Azure Machine Learning cluster compute to run multiple experiments on AML Datasets from VSCode.
-7. Log ML models and ML algorithms parameters using MLFlow.
+7. Log ML models and ML algorithms parameters using MLflow.
 8. Serve chosen ML model through REST API service on Kubernetes. 
 ![](/../ms-build-e2e-ml-bigdata/images/diagram.jpg)
 
