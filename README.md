@@ -26,7 +26,7 @@ This repo holds information and resources for you to create the Microsoft Build 
 ![](/../ms-build-e2e-ml-bigdata/images/diagram.jpg)
 
 ## Tutorials:
-* [Ingest]((https://dev.to/adipolak/simple-data-ingestion-tutorial-with-yahoo-finance-api-and-python-2m6e)) Data with Azure Blob and Eventhubs.
+* [Ingest](https://dev.to/adipolak/simple-data-ingestion-tutorial-with-yahoo-finance-api-and-python-2m6e) Data with Azure Blob and Eventhubs.
 * [Collect, Analyze and Process](https://docs.microsoft.com/en-us/azure/azure-databricks/databricks-sentiment-analysis-cognitive-services?WT.mc_id=build2020_ca-AML_presentation-adpolak) Stream data with Azure Databricks and Eventhubs.
 * [Track](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-use-mlflow?WT.mc_id=build2020_ca-AML_presentation-adpolak) and log ML metrics with MLflow and AML.
 * [Log & Deploy](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-deploy-and-where?WT.mc_id=build2020_ca-AML_presentation-adpolak) your ML Models to Kubernetes environment.
