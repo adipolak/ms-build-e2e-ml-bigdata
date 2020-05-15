@@ -14,7 +14,7 @@ This repo hold the step by step tutorial and resource for you to restore the Mic
 
 # MS-Build 2020: Building an End-to-End ML Pipeline for Big Data​
 
-This repo hold the step by step tutorial and resource for you to restore the Microsoft Build 2020 - Session demo on bulding end to end machine learning pipeline for big data.
+This repo hold the step by step tutorial and resource for you to create the Microsoft Build 2020 - Session demo on Bulding End to End Machine Learning pipelines for Big Data.
 
 
 ### Prerequisites:
