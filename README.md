@@ -23,7 +23,7 @@ This repo holds information and resources for you to create the Microsoft Build 
 6. Use Azure Machine Learning cluster compute to run multiple experiments on AML Datasets from VSCode.
 7. Log ML models and ML algorithms parameters using MLflow.
 8. Serve chosen ML model through REST API service on Kubernetes. 
-![](/../ms-build-e2e-ml-bigdata/images/diagram.jpg)
+![](https://raw.githubusercontent.com/adipola/ms-build-e2e-ml-bigdata/master/images/diagram.jpg?token=AAUMU44FLSHN2KQJCJWDZUK6YAVSU)
 
 ## Tutorials:
 * [Ingest](https://dev.to/adipolak/simple-data-ingestion-tutorial-with-yahoo-finance-api-and-python-2m6e) Data with Azure Blob and Eventhubs.
