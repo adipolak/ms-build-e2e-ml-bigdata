@@ -1,11 +1,10 @@
-# Databricks notebook source
+# Databricks notebook source - this is an interactive script
 import os
 import glob
 from azureml.core.authentication import ServicePrincipalAuthentication
 from azureml.data import DataType
 from pyspark.sql.functions import isnan, when, count, col
 
-# COMMAND ----------
 
 # Hide cell for demo as we cannot (?) use db secrets here somehow
 sp_auth = ServicePrincipalAuthentication(
@@ -14,37 +13,31 @@ sp_auth = ServicePrincipalAuthentication(
   service_principal_password="<service_principal_password>"
 )
 
-# COMMAND ----------
-
 dbfs_mnt_processed = "/mnt/processed/"
 
-# COMMAND ----------
 
-# DBTITLE 1,Data Exploration
-# MAGIC %md Let take a random sample of our dataset
+# Data Exploration
+# Let take a random sample of our dataset
 
-# COMMAND ----------
 
-# DBTITLE 0,Data Exploration
+# Data Exploration
 # Read parquet files into Spark DataFrame
 df = spark.read.parquet(dbfs_mnt_processed + '/redditcomments/')
 
 # Get a sampled subset of data frame rows
 sample_df = df.sample(False, 0.1)
 
-display(sample_df)
-
-# COMMAND ----------
+# when using azure databricks, use this call to visualize the data
+#display(sample_df)
 
 df.select([count(when(col(c).isNull(), c)).alias(c) for c in df.columns]).show()
 
-# COMMAND ----------
 
-# MAGIC %md Normalize Data
 
-# COMMAND ----------
+# Normalize Data
 
-# DBTITLE 0,Normalize columns
+
+# Normalize columns
 from pyspark.ml.feature import MinMaxScaler
 from pyspark.ml.feature import VectorAssembler
 from pyspark.ml import Pipeline
@@ -61,35 +54,26 @@ scaledData = scalerModel.transform(df)
 #vector_scaled is out normalized data: 
 vactorData = scaledData.select("vector","vector_scaled")
 
+# when using azure databricks, use this call to visualize the data
+#display(scaledData.select("vector_scaled"))
 
-# COMMAND ----------
 
-display(scaledData.select("vector_scaled"))
-
-# COMMAND ----------
-
-# MAGIC %md Visualize the top-level categories in our dataset
-
-# COMMAND ----------
-
-# DBTITLE 0,Data Sampling for Experimentation
+# ,Data Sampling for Experimentation
 df = spark.read.parquet(dbfs_mnt_processed + 'redditcomments/')
 
 display(df.groupby("meta").count())
 
-# COMMAND ----------
 
-# MAGIC %md Select a subset with just one top-level category and check it's subcategory's distribution
 
-# COMMAND ----------
-
+# Select a subset with just one top-level category and check it's subcategory's distribution
 df_gaming = df.where(df.meta == "gaming")
 
-display(df_gaming.groupby("subreddit").count())
+# when using azure databricks, use this call to visualize the data
+#display(df_gaming.groupby("subreddit").count())
 
-# COMMAND ----------
 
-# DBTITLE 1,Data Sampling for Experimentation
+
+# Data Sampling for Experimentation
 def match_pattern_on_storage(pattern):
   # Glob for files matching the given pattern
   dbfs_path = glob.glob(r"/dbfs/" + dbfs_mnt_processed + pattern)
@@ -97,11 +81,9 @@ def match_pattern_on_storage(pattern):
   # Get the relative paths of the files to the root of the storage mount
   return [os.path.relpath(path, "/dbfs/" + dbfs_mnt_processed) for path in dbfs_path]
 
-# COMMAND ----------
 
-# MAGIC %md #### Define Dataset Versions
+# Define Dataset Versions
 
-# COMMAND ----------
 
 from azureml.core import Workspace
 from azureml.core import Dataset, Datastore
@@ -114,13 +96,12 @@ azureml_workspace = Workspace.from_config(auth=sp_auth)
 # Like the DBFS Mount, the Azure ML Datastore references the same `processed` container on Azure Storage
 processed_ds = Datastore.get(azureml_workspace, 'datastoreprocessed')
 
-# COMMAND ----------
 
-# MAGIC %md **Dataset A**: a subset of comments in the gaming category. 
-# MAGIC 
-# MAGIC We will use it to run a quick feasiblity analysis experiment. As well to have a cost-effective way to experiment with changes while we iterate on model versions.
 
-# COMMAND ----------
+# Dataset A: a subset of comments in the gaming category. 
+
+# We will use it to run a quick feasiblity analysis experiment. As well to have a cost-effective way to experiment with changes while we iterate on model versions.
+
 
 comments_subset_gaming_dataset = TabularDatasetFactory.from_parquet_files([
       DataPath(processed_ds, path) for path in match_pattern_on_storage(
@@ -129,11 +110,9 @@ comments_subset_gaming_dataset = TabularDatasetFactory.from_parquet_files([
 ])
 
 
-# COMMAND ----------
 
-# MAGIC %md **Dataset B**: the full set of comments for scale model training
+# Dataset: the full set of comments for scale model training
 
-# COMMAND ----------
 
 comments_full_dataset = TabularDatasetFactory.from_parquet_files([
       DataPath(processed_ds, path) for path in match_pattern_on_storage(
@@ -141,9 +120,9 @@ comments_full_dataset = TabularDatasetFactory.from_parquet_files([
       )
 ])
 
-# COMMAND ----------
 
-# DBTITLE 1,Register the data set versions in Azure ML for reference during training
+
+# Register the data set versions in Azure ML for reference during training
 comments_full_dataset.register(
     azureml_workspace,
     name="redditcomments",
