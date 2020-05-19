@@ -1,0 +1,13 @@
+name: scoringenvironment
+dependencies:
+- python=3.6.2
+- pip:
+  - azureml-sdk
+  - azureml-defaults
+  - joblib
+  - matplotlib
+  - scipy
+  - sklearn
+  - azure-cli
+  - pandas
+  - numpy
