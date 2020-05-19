@@ -1,0 +1,11 @@
+name: expenvironment
+dependencies:
+- python=3.6.2
+- pip:
+  - azureml-sdk
+  - matplotlib
+  - scipy
+  - sklearn
+  - azure-cli
+  - pandas
+  - numpy
