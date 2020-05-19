@@ -2,9 +2,8 @@
 from pyspark.sql.types import *
 from pyspark.sql.functions import *
 
-# COMMAND ----------
 
-# DBTITLE 1,Load Raw Comments Data
+# Load Raw Comments Data
 Fschema = StructType([
   StructField("file_index", StringType(), True),
   StructField("text", StringType(), True),
@@ -34,11 +33,11 @@ df = df.drop("file_index")
 
 display(df)
 
-# COMMAND ----------
 
-display(df.limit(100))
 
-# COMMAND ----------
+# when using azure databricks, use this call to visualize the data
+# display(df.limit(100))
+
 
 # Write to storage in parquet format
 df \
