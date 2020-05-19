@@ -7,20 +7,21 @@ ehConf = {
   'eventhubs.connectionString': dbutils.secrets.get(scope="mle2ebigdatakv", key="redditstreamingkey") 
 }
 
-# COMMAND ----------
 
-# DBTITLE 1,Use Event Hubs to stream data to Spark for pre-processing
+
+# Use Event Hubs to stream data to Spark for pre-processing
 inputStream = spark \
   .readStream \
   .format("eventhubs") \
   .options(**ehConf) \
   .load()
 
-display(inputStream)
 
-# COMMAND ----------
+# when using azure databricks, use this call to visualize the data
+#display(inputStream)
 
-# DBTITLE 1,Parse event body and set schema
+
+# Parse event body and set schema
 expectedSchema = StructType([
   StructField("text", StringType(), True),
   StructField("id", StringType(), True),
@@ -65,9 +66,8 @@ comments_stream = comments_stream \
 
 display(comments_stream)
 
-# COMMAND ----------
 
-# DBTITLE 1,Write processed streaming data to storage
+#,Write processed streaming data to storage
 # Stream processed data to parquet for the Data Science to explore and build ML models
 comments_stream.writeStream \
   .trigger(processingTime = "30 seconds") \
