@@ -22,7 +22,7 @@ This repo holds information and resources for you to create the Microsoft Build 
 5. Create multiple Azure ML(AML) Datasets from Azure Databricks environment - save in refined storage directory.
 6. Use Azure Machine Learning cluster compute to run multiple experiments on AML Datasets from VSCode.
 7. Log ML models and ML algorithms parameters using MLflow.
-8. Serve chosen ML model through REST API service on Kubernetes. 
+8. Serve chosen ML model through Dockerized REST API service on Kubernetes. 
 ![](https://github.com/adipola/ms-build-e2e-ml-bigdata/blob/master/images/diagram.jpg)
 
 ## Tutorials:
